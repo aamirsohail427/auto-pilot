@@ -1,0 +1,149 @@
+<dx-popup class="d-con-popup" [fullScreen]="true" [title]="popupTitle" [dragEnabled]="false" [showCloseButton]="true"
+    [shading]="false" [toolbarItems]="popupToolbarItems" [(visible)]="popupVisible" [animation]="popupAnimation"
+    (onHidden)="onPopupHidden($event)" (onHiding)="onPopupHiding($event)">
+    <dx-scroll-view *dxTemplate="let data of 'content'" class="d-con-popup-content">
+        <div class="d-con-form">
+            <dx-form #frmMarketDetails [formData]="frmMarketDetail" [colCount]="2"
+                [readOnly]="!hasEditRight && isEditMode">
+                <dxi-item dataField="insuranceCompany">
+                    <dxo-label [visible]="true" text="Insurance Company"></dxo-label>
+                    <dxi-validation-rule type="required" message="Insurance Company is required.">
+                    </dxi-validation-rule>
+                    <div *dxTemplate="let data of 'content'">
+                        <dx-drop-down-box [(value)]="selectedCompany" valueExpr="id" displayExpr="type"
+                            placeholder="Select..." [(opened)]="isCompanyGridBoxOpened" [deferRendering]="false"
+                            [dataSource]="dtsCompanies" [readOnly]="!hasEditRight && isEditMode">
+                            <div *dxTemplate="let data of 'content'">
+                                <dx-data-grid [dataSource]="dtsCompanies" [keyExpr]="id" [hoverStateEnabled]="true"
+                                    (onRowClick)="onCompanyOptionChanged($event.data)" [showColumnHeaders]="false"
+                                    [scrolling]="{ mode: 'infinite' }"
+                                    [filterRow]="{showOperationChooser:false, visible: true}" height="200">
+                                    <dxo-selection mode="single"></dxo-selection>
+                                    <dxi-column dataField="title" alignment="left" cellTemplate="companyContentTemplate"
+                                        [showInColumnChooser]="false" [allowFiltering]="true" [allowHiding]="false">
+                                    </dxi-column>
+                                    <div *dxTemplate="let itemData of 'companyContentTemplate'">
+                                        <div class="pull-left d-type-padding-top">
+                                            {{itemData.data.title}}
+                                        </div>
+                                        <div class="pull-right">
+                                            <dx-button icon="rename" [visible]="hasCompanyEditRight" stylingMode="text"
+                                                (onClick)="onBtnComapnyEditClicked(itemData.data)">
+                                            </dx-button>
+                                        </div>
+                                    </div>
+                                </dx-data-grid>
+                            </div>
+                            <dxi-button name="dropDown"></dxi-button>
+                            <dxi-button name="create" location="after" [options]="addCompanyOptions"></dxi-button>
+                        </dx-drop-down-box>
+                    </div>
+                </dxi-item>
+                <dxi-item dataField="line">
+                    <dxi-validation-rule type="required" message="Business Line is required.">
+                    </dxi-validation-rule>
+                    <dxo-label [visible]="true" text="Line of Business"></dxo-label>
+                    <div *dxTemplate="let data of 'content'">
+                        <dx-drop-down-box [(value)]="selectedBusinessLine" valueExpr="id" displayExpr="type"
+                            placeholder="Select..." [(opened)]="isBusinessLineGridBoxOpened" [deferRendering]="false"
+                            [dataSource]="dtsBusinessLines" [readOnly]="!hasEditRight && isEditMode">
+                            <div *dxTemplate="let data of 'content'">
+                                <dx-data-grid [dataSource]="dtsBusinessLines" [keyExpr]="id" [hoverStateEnabled]="true"
+                                    (onRowClick)="onBusinessLineOptionChanged($event.data)" [showColumnHeaders]="false"
+                                    [scrolling]="{ mode: 'infinite' }"
+                                    [filterRow]="{ showOperationChooser:false,visible: true}" height="200">
+                                    <dxo-selection mode="single"></dxo-selection>
+                                    <dxi-column dataField="title" alignment="left"
+                                        cellTemplate="businssLineContentTemplate" [showInColumnChooser]="false"
+                                        [allowFiltering]="true" [allowHiding]="false">
+                                    </dxi-column>
+                                    <div *dxTemplate="let itemData of 'businssLineContentTemplate'">
+                                        <div class="pull-left d-type-padding-top">
+                                            {{itemData.data.title}}
+                                        </div>
+                                        <div class="pull-right">
+                                            <dx-button icon="rename" [visible]="hasBusinessLineEditRight"
+                                                stylingMode="text" (onClick)="onBtnLineEditClicked(itemData.data)">
+                                            </dx-button>
+                                        </div>
+                                    </div>
+                                </dx-data-grid>
+                            </div>
+                            <dxi-button name="dropDown"></dxi-button>
+                            <dxi-button name="create" location="after" [options]="addBusinessLineOptions"></dxi-button>
+                        </dx-drop-down-box>
+                    </div>
+                </dxi-item>
+                <dxi-item dataField="type">
+                    <dxi-validation-rule type="required" message="Business Type is required.">
+                    </dxi-validation-rule>
+                    <dxo-label [visible]="true" text="Business Type"></dxo-label>
+                    <div *dxTemplate="let data of 'content'">
+                        <dx-drop-down-box [(value)]="selectedBusinessType" valueExpr="id" displayExpr="type"
+                            placeholder="Select..." [(opened)]="isBusinessTypeGridBoxOpened" [deferRendering]="false"
+                            [dataSource]="dtsBusinessTypes" [readOnly]="!hasEditRight && isEditMode">
+                            <div *dxTemplate="let data of 'content'">
+                                <dx-data-grid [dataSource]="dtsBusinessTypes" [keyExpr]="id" [hoverStateEnabled]="true"
+                                    (onRowClick)="onBusinessTypeOptionChanged($event.data)" [showColumnHeaders]="false"
+                                    [scrolling]="{ mode: 'infinite' }"
+                                    [filterRow]="{ showOperationChooser:false, visible: true}" height="200">
+                                    <dxo-selection mode="single"></dxo-selection>
+                                    <dxi-column dataField="title" alignment="left"
+                                        cellTemplate="businssTypeContentTemplate" [showInColumnChooser]="false"
+                                        [allowFiltering]="true" [allowHiding]="false">
+                                    </dxi-column>
+                                    <div *dxTemplate="let itemData of 'businssTypeContentTemplate'">
+                                        <div class="pull-left d-type-padding-top">
+                                            {{itemData.data.title}}
+                                        </div>
+                                        <div class="pull-right">
+                                            <dx-button icon="rename" [visible]="hasBusinessTypeEditRight"
+                                                stylingMode="text" (onClick)="onBtnTypeEditClicked(itemData.data)">
+                                            </dx-button>
+                                        </div>
+                                    </div>
+                                </dx-data-grid>
+                            </div>
+                            <dxi-button name="dropDown"></dxi-button>
+                            <dxi-button name="create" location="after" [options]="addBusinessTypeOptions"></dxi-button>
+                        </dx-drop-down-box>
+                    </div>
+                </dxi-item>
+                <dxi-item dataField="wirth" editorType="dxSelectBox"
+                    [editorOptions]="{dataSource:dtsWirthBusiness,valueExpr: 'lookupValue', displayExpr: 'lookupText' }">
+                    <dxo-label [visible]="true" text="Business Wirth"></dxo-label>
+                </dxi-item>
+                <dxi-item dataField="state">
+                    <dxi-validation-rule type="required" message="State is required.">
+                    </dxi-validation-rule>
+                    <dxo-label [visible]="true" text="States"></dxo-label>
+                    <div *dxTemplate="let data of 'content'">
+                        <dx-tag-box [(value)]="frmMarketDetail.selectedStates" [readOnly]="!hasEditRight && isEditMode" [multiline]="false"
+                            [searchEnabled]="true" [showSelectionControls]="true" displayExpr="name" valueExpr="id"
+                            placeholder="Select..." [items]="dtsStates">
+                            <dxi-button name="create" location="after" [options]="addStateOptions">
+                            </dxi-button>
+                        </dx-tag-box>
+                    </div>
+                </dxi-item>
+
+                <dxi-item dataField="isFavorite" editorType="dxCheckBox">
+                    <dxo-label [visible]="true" text="Favorite"></dxo-label>
+                </dxi-item>
+                <dxi-item name="notes" class="d-con-notes" [colSpan]="2">
+                    <dxo-label [visible]="true" text="Notes"></dxo-label>
+                    <dx-validation-group #notesBody *dxTemplate="let data of 'content'">
+                        <dx-html-editor [(value)]="frmMarketDetail.notes" class="d-notes-editor" [height]="200" [readOnly]="!hasEditRight && isEditMode">
+                            <dxo-toolbar [multiline]="false"
+                                [items]="['bold', 'italic', 'underline','separator','alignLeft','alignCenter','alignRight','alignJustify','separator', 'orderedList','bulletList','separator','color' ]">
+                            </dxo-toolbar>
+                            <dxo-media-resizing [enabled]=true></dxo-media-resizing>
+                        </dx-html-editor>
+                    </dx-validation-group>
+                </dxi-item>
+
+            </dx-form>
+        </div>
+    </dx-scroll-view>
+</dx-popup>
+<ng-template #componentDetailContainer></ng-template>

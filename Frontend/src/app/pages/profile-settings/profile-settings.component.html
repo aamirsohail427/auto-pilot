@@ -1,0 +1,56 @@
+<h2 class="content-block">Profile Settings</h2>
+
+<div class="content-block dx-card responsive-paddings">
+    <dx-form #frmProfileSettingDetail [(formData)]="dtsProfileSetting" labelLocation="top" class="d-profile-setting">
+        <dxi-item itemType="group" caption="Personal Details" [colCount]="2">
+            <dxi-item dataField="firstName">
+                <dxo-label [visible]="true" text="First Name"></dxo-label>
+                <dxi-validation-rule type="required" message="First Name is required.">
+                </dxi-validation-rule>
+            </dxi-item>
+            <dxi-item dataField="lastName">
+                <dxo-label [visible]="true" text="Last Name"></dxo-label>
+                <dxi-validation-rule type="required" message="Last Name is required.">
+                </dxi-validation-rule>
+            </dxi-item>
+            <dxi-item dataField="email" [editorOptions]="{ mode: 'email',maxLength: 50 }">
+                <dxo-label [visible]="true" text="Email Address"></dxo-label>
+                <dxi-validation-rule type="required" message="Email address is required.">
+                </dxi-validation-rule>
+                <dxi-validation-rule type="email" message="Email address is not valid">
+                </dxi-validation-rule>
+            </dxi-item>
+            <dxi-item dataField="phone" [editorOptions]="{mask: '(000) 000-0000'}">
+                <dxo-label [visible]="true" text="Phone"></dxo-label>
+                <dxi-validation-rule type="required" message="Phone is required.">
+                </dxi-validation-rule>
+            </dxi-item>
+            <dxi-item>
+                <dxo-label [visible]="isPhotoPreview" text="Profile Photo"></dxo-label>
+                <div *dxTemplate="let data of 'content'">
+                    <div *ngIf="dtsProfileSetting.photoPath && isEditMode">
+                        <img [src]="dtsProfileSetting.photoPath" [width]="143" [height]="143" alt="" />
+                    </div>
+                    <div id="preview" *ngIf="isPhotoPreview"></div>
+                    <div class="d-con-button-trash">
+                        <dx-button *ngIf="isPhotoPreview" class="d-con-button-trash-buttom" icon="fa fa-trash"
+                            (click)="onBtnDeletePhotoClick()"></dx-button>
+                        <dx-file-uploader selectButtonText="Select Image" labelText="" [disabled]="isPhotoPreview"
+                            selectButtonText="Upload Photo" (onValueChanged)="onFudPhotoValueChanged($event)"
+                            [multiple]="false" [maxFileSize]="3000000" accept="image/*" uploadMode="useForm">
+                        </dx-file-uploader>
+                    </div>
+                </div>
+            </dxi-item>
+        </dxi-item>
+        <dxi-item itemType="group">
+            <dxi-item>
+                <div *dxTemplate>
+                    <shared-button class="d-shared-button pull-right" (clicked)="onBtnSaveSettingClicked()" [customText]="'Save'"
+                        [isDisabled]="isDataProcessing" [isVisible]="true">
+                    </shared-button>
+                </div>
+            </dxi-item>
+        </dxi-item>
+    </dx-form>
+</div>

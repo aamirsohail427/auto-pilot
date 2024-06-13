@@ -1,0 +1,62 @@
+<dx-popup class="d-con-popup" [title]="popupTitle" [width]="'50%'" [height]="'100%'" [dragEnabled]="false"
+    [showCloseButton]="true" (onHidden)="onPopupHidden($event)" [(visible)]="popupVisible" [animation]="popupAnimation"
+    [toolbarItems]="popupToolbarItems" [position]="popupPosition">
+    <div *dxTemplate="let data of 'content'" class="d-con-popup-content">
+        <dx-form #frmMessagingDetails [formData]="dtsMessaging">
+            <dxi-item dataField="to" editorType="dxDropDownBox" [editorOptions]="{valueExpr:'id',displayExpr:'firstName',
+            value:grdCustomerSelectedRowKeys,placeholder:'Select...',
+            dataSource:dtsCustomers,contentTemplate:'toDropDownTemplate',
+            dropDownOptions:{width:'100%'}}">
+                <dxo-label text="To" id="toDropDownBox"></dxo-label>
+                <dxi-validation-rule type="required" message="To is required">
+                </dxi-validation-rule>
+            </dxi-item>
+            <dxi-item dataField="subject">
+                <dxi-validation-rule type="required" message="Subject is required"></dxi-validation-rule>
+                <dxo-label [visible]="true" text="Subject"></dxo-label>
+            </dxi-item>
+            <dxi-item>
+                <div *dxTemplate="let data of 'content'">
+                    <dx-select-box [dataSource]="dtsTypes" displayExpr="lookupText" valueExpr="lookupValue"
+                        (onValueChanged)="onTypeValueChanged($event)">
+                    </dx-select-box>
+                </div>
+                <dxo-label [visible]="true" text="Message Type"></dxo-label>
+            </dxi-item>
+            <dxi-item dataField="templateId" editorType="dxSelectBox"
+                [editorOptions]="{dataSource:dtsTemplates,valueExpr: 'id', displayExpr:'templateTitle' }"
+                [visible]="isTemplate">
+                <dxo-label [visible]="true" text="Select Template"></dxo-label>
+            </dxi-item>
+            <dxi-item name="emailBody" class="d-con-notes" [visible]="!isTemplate">
+                <dxo-label [visible]="true" text="Message Body"></dxo-label>
+                <dx-validation-group #notesBody *dxTemplate="let data of 'content'">
+                    <dx-html-editor [(value)]="dtsMessaging.emailBody" class="d-notes-editor"
+                        [height]="emailEditorHeight()">
+                        <dxo-toolbar [multiline]="false"
+                            [items]="['bold', 'italic', 'underline','separator','alignLeft','alignCenter','alignRight','alignJustify','separator', 'orderedList','bulletList','separator','color' ]">
+                        </dxo-toolbar>
+                        <dxo-media-resizing [enabled]=true></dxo-media-resizing>
+                    </dx-html-editor>
+                </dx-validation-group>
+            </dxi-item>
+            <div id="toDropDownTemplate" *dxTemplate="let data of 'toDropDownTemplate'">
+                <dx-data-grid #grdCustomerContact class="d-grid-no-bacth-actions-filter" [dataSource]="dtsCustomers"
+                    [filterRow]="{ visible: true,showOperationChooser:false }" [height]="'100%'"
+                    (onSelectionChanged)="onContactSelectionChanged($event)"
+                    [(selectedRowKeys)]="grdCustomerSelectedRowKeys">
+                    <dxo-selection mode="multiple" selectAllMode="AllPages" showCheckBoxesMode="always"></dxo-selection>
+                    <dxo-paging [pageSize]="10"></dxo-paging>
+                    <dxo-pager [showPageSizeSelector]="true" [allowedPageSizes]="[10,25]">
+                    </dxo-pager>
+                    <dxo-load-panel [enabled]="true" text="Loading...">
+                    </dxo-load-panel>
+                    <dxi-column sortOrder="asc" dataField="name" [caption]="'Name'"
+                        [calculateCellValue]="getUserDisplayName">
+                    </dxi-column>
+                    <dxi-column dataField="email"></dxi-column>
+                </dx-data-grid>
+            </div>
+        </dx-form>
+    </div>
+</dx-popup>

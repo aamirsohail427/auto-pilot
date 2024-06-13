@@ -1,0 +1,4 @@
+{
+    "apiEndPoint": "https://localhost:44352/",
+    "blobSasUrl":"https://thelivemd.blob.core.windows.net/mdlive/"
+}

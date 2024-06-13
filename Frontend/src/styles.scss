@@ -1,0 +1,17 @@
+
+.dx-item.dx-treeview-item:hover {
+    background-color: #142639 !important;
+}
+li.dx-state-selected.dx-treeview-item-without-checkbox.dx-treeview-node.dx-treeview-node-is-leaf {
+    background-color: #142639 !important;
+}
+ .menu-container .dx-treeview .dx-treeview-node[aria-level="1"] {
+    font-weight: bold;
+     border-bottom: 1px solid #142639 !important; 
+}
+ .menu-container .dx-treeview .dx-treeview-node-container .dx-treeview-node.dx-state-selected > .dx-treeview-item * {
+    color: #fff !important;
+}
+.edu-date-range-filter{
+    padding: 0 0 15px 0;
+}

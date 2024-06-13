@@ -1,0 +1,24 @@
+<dx-popup class="d-con-popup d-con-detail-popup" [(visible)]="popupVisible" [toolbarItems]="popupToolbarItems"
+    [(width)]="popupWidth" [(height)]="popupHeight" [minWidth]="minWidth" [minHeight]="minHeight" [title]="popupTitle"
+    [dragEnabled]="true" [resizeEnabled]="true" (onHiding)="onPopupHiding($event)" (onHidden)="onPopupHidden($event)">
+    <div class="d-con-form">
+        <dx-form #frmLookupDetails [formData]="frmLookupDetail" [colCount]="2" [showColonAfterLabel]="false"
+            labelLocation="top">
+            <dxi-item dataField="text">
+                <dxo-label [visible]="true" text="Text"></dxo-label>
+                <dxi-validation-rule type="required" message="Text is required.">
+                </dxi-validation-rule>
+            </dxi-item>
+            <dxi-item dataField="type">
+                <dxo-label [visible]="true" text="Type"></dxo-label>
+                <dxi-validation-rule type="required" message="Type is required.">
+                </dxi-validation-rule>
+            </dxi-item>
+            <dxi-item dataField="value">
+                <dxo-label [visible]="true" text="Value"></dxo-label>
+                <dxi-validation-rule type="required" message="Value is required.">
+                </dxi-validation-rule>
+            </dxi-item>
+        </dx-form>
+    </div>
+    <ng-template #componentContainer></ng-template>

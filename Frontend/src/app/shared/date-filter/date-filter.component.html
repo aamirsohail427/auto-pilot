@@ -1,0 +1,30 @@
+<div [ngClass]="{'d-con-hidden':!isShow}">
+  <div class="d-con-date-filter">
+    <dx-form #frmDateRange id="formDateFilter" [items]="formItems" labelLocation="left"
+      (onContentReady)="onFrmDateRangeContentReady($event)" [showColonAfterLabel]="false">
+
+      <div *dxTemplate="let d of 'dateTypesTemplate'">
+
+        <dx-drop-down-box #ddbDateType [dataSource]="dtsDateTypes" valueExpr="value" displayExpr="text"
+          [(value)]="dateType" class="d-round-border">
+          <div *dxTemplate="let data of 'dropDownButton'">
+            <div class="d-dropdown-arrow">
+              <i class="fa fa-caret-down"></i>
+            </div>
+          </div>
+          <div *dxTemplate="let data of 'content'">
+            <dx-list #trvDateType [dataSource]="dtsDateTypes" dataStructure="plain" keyExpr="value" selectionMode="single"
+              showCheckBoxesMode="none" displayExpr="text" (onContentReady)="onTrvStatusContentReady($event)"
+              (onItemClick)="onDateTypeItemClicked($event)">
+            </dx-list>
+          </div>
+        </dx-drop-down-box>
+      </div>
+
+      <div *dxTemplate="let d of 'filterTemplate'">
+        <dx-button type="default" text="Filter" horizontalAlignment="'left'" (onClick)="onBtnFilterClick($event)" class="d-margin-left-10">
+        </dx-button>
+      </div>
+    </dx-form>
+  </div>
+</div>

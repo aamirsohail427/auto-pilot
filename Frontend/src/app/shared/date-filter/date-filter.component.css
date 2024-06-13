@@ -1,0 +1,39 @@
+
+dx-button.d-shared-date-filter-button.dx-button.dx-button-default.dx-button-mode-contained.dx-widget.dx-button-has-text {
+    margin-top: 25px;
+}
+
+.d-con-date-filter .dx-box-flex.dx-box.dx-widget.dx-visibility-change-handler.dx-collection{
+    flex-direction: row !important;
+}
+.d-con-date-filter .dx-layout-manager .dx-field-item:not(.dx-first-row){
+    padding-top: 0;
+}
+
+.d-con-date-filter .dx-item.dx-box-item:last-child{
+     text-align: right;
+}
+@media  screen and (max-width:1800px){
+    .d-con-date-filter .dx-box-flex.dx-box.dx-widget.dx-visibility-change-handler.dx-collection{
+        flex-wrap: wrap;
+    }
+    .d-con-date-filter .dx-item.dx-box-item:not(:last-child){
+        width: 100%;
+    }
+    .d-con-date-filter  .dx-item.dx-box-item:not(:first-child)    {
+        padding-top: 10px !important;
+    } 
+}
+.d-con-date-filter .dx-datebox.dx-auto-width .dx-texteditor-input, 
+.d-con-date-filter .dx-datebox:not(.dx-texteditor-empty).dx-auto-width .dx-texteditor-input{
+ padding-right: 2px;
+}
+
+.d-margin-left-10{
+    margin-left: 10px;
+}
+
+.d-date-filter-datatype label{
+    width: 80px;
+    margin-right: 10px;
+}

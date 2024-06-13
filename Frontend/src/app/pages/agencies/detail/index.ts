@@ -1,0 +1,1 @@
+export * from './agency-detail.component'

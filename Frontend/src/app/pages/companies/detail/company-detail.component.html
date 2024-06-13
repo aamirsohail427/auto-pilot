@@ -1,0 +1,13 @@
+<dx-popup class="d-con-popup" [(visible)]="popupVisible" [toolbarItems]="popupToolbarItems"
+    [(width)]="popupWidth" [(height)]="popupHeight" [title]="popupTitle" [dragEnabled]="true" [resizeEnabled]="true"
+    (onHiding)="onPopupHiding($event)" (onHidden)="onPopupHidden($event)"
+    (onInitialized)="onCompanyPopupInitialized($event)">
+    <div *dxTemplate="let data of 'content'" class="d-con-popup-content">
+        <dx-form #fromCompanies [formData]="frmCompany" [readOnly]="!hasEditRight && isEditMode">
+            <dxi-item dataField="title">
+                <dxi-validation-rule type="required" message="Title is required"></dxi-validation-rule>
+                <dxo-label [visible]="true" text="Title"></dxo-label>
+            </dxi-item>
+        </dx-form>
+    </div>
+</dx-popup>

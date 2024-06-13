@@ -1,0 +1,125 @@
+<div class="d-con-login" [hidden]="!showLoginForm">
+    <div class="d-con-login-center" [ngStyle]="{'width':loginPanelWidth+'px'}">
+        <div class="d-login-panel" *ngIf="isLogin">
+            <div class="d-con-login-logo">
+                <img src="https://autopilotcsr.com/wp-content/uploads/2020/06/cropped-autopilot-csr-logo2.png"
+                    class="d-login-logo">
+            </div>
+            <div class="dx-card content">
+                <div class="header">
+                    <div class="title">{{title}}</div>
+                    <div class="description">{{description}}</div>
+                </div>
+                <ng-content></ng-content>
+            </div>
+            <div class="d-con-login-body">
+                <header>
+                    <span class="d-login-in-header">Welcome Back !</span>
+                    <span class="d-login-in-sub-header">Sign in to continue to Auto Pilot CSR</span>
+                </header>
+                <div class="d-login-in-error-panel" *ngIf="loginFailed">
+                    <div class="d-login-in-error-header">Failed</div>
+                    <div [innerHTML]="loginFailedMsg"></div>
+                </div>
+                <dx-form #loginForm [formData]="loginInfo" [showColonAfterLabel]="false" [labelLocation]="'top'"
+                    [requiredMark]="''" (onFieldDataChanged)="onFrmFieldDataChanged($event)"
+                    (onEditorEnterKey)="onFrmLoginEditorEnterKey($event)">
+
+                    <dxi-item dataField="userName"
+                        [editorOptions]="{ placeholder: 'Username',onValueChanged: onUserNameValueChanged }">
+                        <dxi-validation-rule type="required" message="Username is required"></dxi-validation-rule>
+                        <dxi-validation-rule type="email" message="Email address is not valid">
+                        </dxi-validation-rule>
+                        <dxo-label [visible]="false"></dxo-label>
+                    </dxi-item>
+
+                    <dxi-item dataField="password" [editorOptions]="{ placeholder: 'Password', mode: 'password' }">
+                        <dxi-validation-rule type="required" message="Password is required"></dxi-validation-rule>
+                        <dxo-label [visible]="false"></dxo-label>
+                    </dxi-item>
+                    <dxi-item dataField="rememberMe" editorType="dxCheckBox"
+                        [editorOptions]="{ text: 'Remember me', elementAttr: { class: 'form-text' } }">
+                        <dxo-label [visible]="false"></dxo-label>
+                    </dxi-item>
+                </dx-form>
+                <dx-button [text]="btnSigninText" [disabled]="isBtnSigninDisabled" type="default"
+                    (onClick)="onSignInBtnClick()" [elementAttr]="{'class':'d-login-button'}">
+                </dx-button>
+                <div class="d-con-login-bottom">
+                    <!-- <div>By clicking Sign in, you agree to our </div> -->
+                    <a href="javascript:void(0)">License Agreement</a>
+                    <div class="d-login-forgort-psd">
+                        <a (click)="onChangeScreenClick('');" href="javascript:void(0)">I forgot my password</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="d-login-panel" *ngIf="isPassword">
+            <div class="d-con-login-logo">
+                <img src="https://autopilotcsr.com/wp-content/uploads/2020/06/cropped-autopilot-csr-logo2.png"
+                    class="d-login-logo">
+            </div>
+            <div class="d-con-login-body">
+                <header>
+                    <span class="d-login-in-header">Get help signing in to Auto Pilot</span>
+                    <span class="d-login-in-sub-header"></span>
+                </header>
+                <div class="d-login-in-error-panel" *ngIf="userIdValidateFailed">
+                    <div class="d-login-in-error-header">Failed</div>
+                    <div [innerHTML]="userIdValidateMsg"></div>
+                </div>
+                <dx-form #forgetPasswordForm [formData]="loginInfo" [showColonAfterLabel]="false"
+                    [labelLocation]="'top'" [requiredMark]="''" (onFieldDataChanged)="onFrmFieldDataChanged($event)">
+                    <dxi-item dataField="email" editorType="dxTextBox"
+                        [editorOptions]="{mode:'email', placeholder: 'Email',maxLength: 50}">
+                        <dxo-label [visible]="false"></dxo-label>
+                        <dxi-validation-rule type="email" message="Email address is not valid">
+                        </dxi-validation-rule>
+                        <dxi-validation-rule type="stringLength" [max]="255"
+                            message="Email should not exceed 255 characters."></dxi-validation-rule>
+                        <dxi-validation-rule type="required" message="Email address is required"></dxi-validation-rule>
+                    </dxi-item>
+                </dx-form>
+
+                <div class="d-con-password-bottom row">
+                    <hr />
+                    <div class="col-md-6 d-login-button">
+                        <a (click)="onChangeScreenClick('login');" href="javascript:void(0)">Back to Sign in</a>
+                    </div>
+                    <div class="col-md-6 d-login-button">
+                        <dx-button text="Continue" [disabled]="isBtnSigninDisabled" type="default"
+                            (onClick)="onChangeScreenClick('passwordResult')">
+                        </dx-button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="d-login-panel" *ngIf="isPasswordResult">
+            <div class="d-con-login-logo">
+                <img src="https://autopilotcsr.com/wp-content/uploads/2020/06/cropped-autopilot-csr-logo2.png"
+                    class="d-login-logo">
+            </div>
+            <div class="d-con-login-body">
+                <header>
+                    <span *ngIf="!emailValidateFailed" class="d-login-in-header">The password successfully reset</span>
+                    <span *ngIf="emailValidateFailed" class="d-login-in-header">Operation Failed</span>
+                    <span class="d-login-in-sub-header"></span>
+                </header>
+                <div *ngIf="!emailValidateFailed" class="d-con-span">
+                    The new password was sent to your email address:
+                </div>
+                <div *ngIf="emailValidateFailed" class="d-con-span">
+                    <div [innerHTML]="emailValidateMsg"></div>
+                </div>
+                <div *ngIf="!emailValidateFailed" class="d-con-reset-passord-email d-con-span">{{loginInfo.email}}</div>
+                <div class="d-con-password-bottom row">
+                    <hr />
+                    <div class="col-md-12 d-login-button">
+                        <dx-button text="Sign in" type="default" (onClick)="onChangeScreenClick('login');">
+                        </dx-button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

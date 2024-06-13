@@ -1,0 +1,73 @@
+<dx-popup class="d-con-popup" [fullScreen]="true" [title]="popupTitle" [dragEnabled]="false" [showCloseButton]="true"
+    [shading]="false" [toolbarItems]="popupToolbarItems" [(visible)]="popupVisible" [animation]="popupAnimation"
+    (onHidden)="onPopupHidden($event)" (onHiding)="onPopupHiding($event)">
+    <dx-scroll-view *dxTemplate="let data of 'content'" class="d-con-popup-content">
+        <div class="d-con-form">
+            <dx-form #frmNewBusinessDetails [formData]="frmNewBusiness" [colCount]="2">
+                <dxi-item dataField="carrierId" editorType="dxSelectBox"
+                    [editorOptions]="{ items: dtsBusinessLines, searchEnabled: true, value: '' }">
+                    <dxo-label [visible]="true" text="Company Name"></dxo-label>
+                    <dxi-validation-rule type="required" message="Company Name is required.">
+                    </dxi-validation-rule>
+                </dxi-item>
+                <dxi-item dataField="customerId" editorType="dxSelectBox"
+                    [editorOptions]="{ items: dtsBusinessLines, searchEnabled: true, value: '' }">
+                    <dxo-label [visible]="true" text="Customer Name"></dxo-label>
+                    <dxi-validation-rule type="required" message="Customer Name is required.">
+                    </dxi-validation-rule>
+                </dxi-item>
+                <dxi-item dataField="line" editorType="dxSelectBox"
+                    [editorOptions]="{ items: dtsBusinessLines, searchEnabled: true, value: '' }">
+                    <dxo-label [visible]="true" text="Business Line"></dxo-label>
+                    <dxi-validation-rule type="required" message="Business Line is required.">
+                    </dxi-validation-rule>
+                </dxi-item>
+                <dxi-item dataField="csrId" editorType="dxSelectBox"
+                    [editorOptions]="{ items: dtsCSR, searchEnabled: true, value: '' }">
+                    <dxo-label [visible]="true" text="CSR"></dxo-label>
+                    <dxi-validation-rule type="required" message="CSR is required.">
+                    </dxi-validation-rule>
+                </dxi-item>
+                <dxi-item dataField="agentId" editorType="dxSelectBox"
+                    [editorOptions]="{ items: dtsAgents, searchEnabled: true, value: '' }">
+                    <dxo-label [visible]="true" text="Agent"></dxo-label>
+                    <dxi-validation-rule type="required" message="Agent is required.">
+                    </dxi-validation-rule>
+                </dxi-item>
+                <dxi-item dataField="policyId" editorType="dxSelectBox"
+                    [editorOptions]="{ items: dtsCSR, searchEnabled: true, value: '' }">
+                    <dxo-label [visible]="true" text="Policy"></dxo-label>
+                    <dxi-validation-rule type="required" message="Policy is required.">
+                    </dxi-validation-rule>
+                </dxi-item>
+                <dxi-item dataField="status">
+                    <dxo-label [visible]="true" text="Status"></dxo-label>
+                    <dxi-validation-rule type="required" message="Status is required.">
+                    </dxi-validation-rule>
+                </dxi-item>
+                <dxi-item dataField="term">
+                    <dxo-label [visible]="true" text="Term"></dxo-label>
+                    <dxi-validation-rule type="required" message="Term is required.">
+                    </dxi-validation-rule>
+                </dxi-item>
+                <dxi-item dataField="policyType">
+                    <dxo-label [visible]="true" text="Policy Type"></dxo-label>
+                    <dxi-validation-rule type="required" message="Policy Type is required.">
+                    </dxi-validation-rule>
+                </dxi-item>
+                <dxi-item dataField="policyNumber">
+                    <dxo-label [visible]="true" text="Policy Number"></dxo-label>
+                    <dxi-validation-rule type="required" message="Policy Number is required.">
+                    </dxi-validation-rule>
+                </dxi-item>
+                <dxi-item dataField="effectiveDate" editorType="dxDateBox">
+                    <dxo-label [visible]="true" text="Effective Date"></dxo-label>
+                </dxi-item>
+                <dxi-item dataField="expirationDate" editorType="dxDateBox">
+                    <dxo-label [visible]="true" text="Expiration Date"></dxo-label>
+                </dxi-item>
+            </dx-form>
+        </div>
+    </dx-scroll-view>
+
+    <ng-template #componentContainer></ng-template>

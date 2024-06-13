@@ -1,0 +1,26 @@
+<dx-popup class="d-con-popup" #emailTemplateDetail [showCloseButton]="true" [fullScreen]="true" [title]="popupTitle"
+    [dragEnabled]="false" [shading]="false" [toolbarItems]="popupToolbarItems" [(visible)]="popupVisible"
+    [animation]="popupAnimation" (onHidden)="onPopupHidden($event)" (onHiding)="onTemplateHiding($event)">
+    <dx-scroll-view>
+        <div class="d-con-popup-content">
+            <dx-form #frmEmailTemplateDetail [formData]="dtsEmailTemplates" [colCount]="2"
+                [readOnly]="!hasEditRight && isEditMode">
+                <dxi-item dataField="templateTitle">
+                    <dxi-validation-rule type="required" message="Title is required"></dxi-validation-rule>
+                    <dxo-label [visible]="true" text="Title"></dxo-label>
+                </dxi-item>
+                <dxi-item dataField="templateSubject">
+                    <dxi-validation-rule type="required" message="Subject is required"></dxi-validation-rule>
+                    <dxo-label [visible]="true" text="Subject"></dxo-label>
+                </dxi-item>
+                <dxi-item [colSpan]="2">
+                    <div style="margin-top: 15px;" *dxTemplate>
+                        <email-editor #editor [options]="options" (loaded)="editorLoaded($event)"></email-editor>
+                    </div>
+                </dxi-item>
+            </dx-form>
+
+
+        </div>
+    </dx-scroll-view>
+</dx-popup>

@@ -1,0 +1,80 @@
+<div class="page-title">
+    <dx-form labelLocation="left" [showColonAfterLabel]="false" [colCount]="12">
+        <dxo-col-count-by-screen [xs]="1" [sm]="1" [md]="1" [lg]="1"></dxo-col-count-by-screen>
+        <dxi-item>
+            <div *dxTemplate>
+                <h2 class="page-info-title">Renewal Business</h2>
+            </div>
+        </dxi-item>
+    </dx-form>
+</div>
+<div class="d-con-page-tiles">
+    <dx-form>
+        <dxo-col-count-by-screen [xs]="1" [sm]="1" [md]="1" [lg]="1"></dxo-col-count-by-screen>
+        <dxi-item cssClass="d-no-left-right-padding">
+            <div class="d-map-card ">
+                <div class="d-map-card-icon d-map-card-clickable d-map-card-archived d-full-box">
+                    <div class="d-value">
+                        {{ numOfRenewal | currency:'':'':'1.0-0' }}
+                    </div>
+                    <div class="d-title">
+                        Renewal Business
+                    </div>
+                </div>
+            </div>
+        </dxi-item>
+    </dx-form>
+</div>
+<div class="content-block dx-card responsive-paddings">
+
+    <dx-data-grid #grdRenewalBusiness class="d-grid-no-bacth-actions-filter" [dataSource]="dtsRenewalBusiness"
+        (onToolbarPreparing)="onGrdRenewalBusinessToolbarPreparing($event)">
+
+        <dxo-export [enabled]="true" [fileName]="'Renewal Business'" [allowExportSelectedData]="false">
+            <dxo-texts exportAll="Export to Excel"></dxo-texts>
+        </dxo-export>
+        <dxo-paging [pageSize]="25"></dxo-paging>
+        <dxo-pager [showPageSizeSelector]="true" [allowedPageSizes]="listPagerSource"></dxo-pager>
+        <dxo-filter-row [visible]="true"></dxo-filter-row>
+        <dxo-header-filter [visible]="true"></dxo-header-filter>
+
+        <dxi-column dataField="carrier" caption="Company Name" [allowHeaderFiltering]="false" [hidingPriority]="5"
+            [allowFiltering]="true">
+        </dxi-column>
+        <dxi-column dataField="customerName" caption="Customer Name" [allowHeaderFiltering]="false"
+            [allowFiltering]="true">
+        </dxi-column>
+        <dxi-column dataField="lob" caption="Business Line" [allowHeaderFiltering]="true" [hidingPriority]="4"
+            [allowFiltering]="true">
+        </dxi-column>
+        <dxi-column dataField="csr" caption="CSR" [allowHeaderFiltering]="true" [hidingPriority]="3"
+            [allowFiltering]="true">
+        </dxi-column>
+        <dxi-column dataField="agent" caption="Agent" [allowHeaderFiltering]="true" [hidingPriority]="2"
+            [allowFiltering]="true">
+        </dxi-column>
+        <dxi-column dataField="sublineName" alignment="left" [hidingPriority]="0" [allowHeaderFiltering]="true"
+            [allowFiltering]="false" caption="Status"></dxi-column>
+
+        <dxi-column dataField="effectiveDate" caption="Effective Date" [hidingPriority]="1" dataType="date"
+            [allowHeaderFiltering]="true" [allowFiltering]="true" [format]="dateTimeFormat">
+        </dxi-column>
+        <dxi-column dataField="remainingDays" caption="Remaining Days" [allowHeaderFiltering]="false"
+            [allowFiltering]="true">
+        </dxi-column>
+        <dxi-column dataField="id" [width]="80" alignment="right" caption="Action" [allowEditing]="false"
+            [allowExporting]="false" [allowFiltering]="false" [allowFixing]="false" [allowGrouping]="false"
+            [allowHeaderFiltering]="false" [allowHiding]="false" [allowReordering]="false" [allowResizing]="false"
+            [allowSearch]="false" [allowSorting]="false" cellTemplate="buttonTemplate"></dxi-column>
+        <div *dxTemplate="let buttonInfo of 'buttonTemplate'">
+            <div class="d-con-cell-action text-right">
+                <button type="button" [disabled]="isDataProcessing" id="btnMainAction-{{buttonInfo.data.id}}"
+                    (click)="onBtnMainActionClick(buttonInfo.data)">
+                    View
+                </button>
+            </div>
+        </div>
+    </dx-data-grid>
+
+</div>
+<ng-template #componentContainer></ng-template>

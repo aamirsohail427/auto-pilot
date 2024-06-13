@@ -1,0 +1,149 @@
+.d-login-button{
+  margin-bottom: 15px;
+}
+.d-con-login {
+  height: 100%;
+  width: 100%;
+  font-size: 1.4rem;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  line-height: normal;
+  overflow: auto;
+  background: #193048;
+  display: flex;
+  align-items: center;
+}
+
+.d-con-login-top {
+  height: 10%;
+}
+
+.d-con-login-center {
+  height: auto;
+  margin: auto;
+}
+
+.d-login-panel {
+  width: 100%;
+  margin-left: auto;
+  margin-right: auto;
+  height: 100%;
+}
+
+.d-con-login-logo {
+  background: #193048;
+  margin-bottom: 15px;
+  text-align: center;
+}
+
+
+.d-con-login-body {
+  border: none;
+  width: 100%;
+  z-index: 100;
+  background-color: #ffffff;
+  padding: 30px;
+  font-size: 12px;
+  line-height: 1.5;
+  text-align: left;
+  overflow: visible;
+  border-radius: 4px;
+}
+
+.d-con-login-body label {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  outline: 0;
+}
+
+.d-con-login-body header {
+  padding-bottom: 10px;
+  display: block;
+}
+
+.d-con-login-body .d-login-in-header {
+  font-size: 22px;
+  font-weight: 300;
+  display: block;
+}
+
+.d-con-login-body .d-login-in-sub-header {
+  font-size: 14px;
+  font-weight: 300;
+  line-height: 1.2;
+  padding-bottom: 15px;
+  display: block;
+}
+
+.d-con-login-body .dx-field-item-label {
+  padding-bottom: 6px;
+}
+
+.d-con-login-body .dx-field-item-content {
+  margin-bottom: 5px;
+}
+
+.d-login-in-error-panel{
+  background-color: #FDEDED;
+  padding: 20px;
+  text-align: center;
+  margin-bottom: 20px;
+  color: #737373;
+  background-color: #FCEDED;
+  border: 1px solid #d8d8d8;
+  border-radius: 5px;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  padding: 10px;
+  font-size: 1.2em;
+}
+
+.d-login-in-error-header {
+  font-size: 1.2em;
+  line-height: 2;
+}
+
+.d-login-button{
+  margin-top: 10px;
+}
+
+.d-con-login-bottom,
+.d-login-forgort-psd {
+  margin-top: 20px;
+}
+
+.d-con-login .d-con-login-center .d-login-bottom-span {
+  color: #999999;
+  text-align: left;
+  text-decoration: none;
+  font-size: 8.0pt;
+  font-style: normal;
+  font-weight: 400;
+  margin-top: 5px;
+}
+
+.d-con-login .d-con-login-center .d-con-passord-email {
+padding-top: 6px;
+margin-left: 20px;
+}
+
+.d-con-login .d-con-login-center .d-con-password-bottom a {
+line-height: 36px;
+}
+.d-con-password-bottom hr{
+  margin: 15px !important;
+}
+
+.d-con-login .d-con-login-center .d-con-password-bottom .dx-button {
+float: right;
+}
+
+.d-con-login .d-con-login-center .d-con-span {
+font-size: 14px;
+}
+
+.d-con-login .d-con-login-center .d-con-reset-passord-email {
+  padding-top: 6px;
+}

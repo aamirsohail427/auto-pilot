@@ -1,0 +1,66 @@
+<dx-context-menu #cnmActions [dataSource]="dtsActions" [width]="'auto'" [target]="cnmActionsTarget"
+    [(visible)]="cnmActionsVisible" (onItemClick)="onCnmActionsItemClick($event)" [showEvent]="undefined">
+    <dxo-position [my]="'top right'" [at]="'bottom right'"></dxo-position>
+</dx-context-menu>
+<div class="page-title">
+    <dx-form labelLocation="left" [showColonAfterLabel]="false" [colCount]="12">
+        <dxo-col-count-by-screen [xs]="2" [sm]="2" [md]="2" [lg]="2"></dxo-col-count-by-screen>
+        <dxi-item>
+            <div *dxTemplate>
+                <h2 class="page-info-title">Lookups</h2>
+            </div>
+        </dxi-item>
+        <dxi-item>
+            <div *dxTemplate>
+                <div class="pull-right">
+                    <shared-button class="d-shared-button" [customText]="'Add Lookup'" [isDisabled]="isDataProcessing"
+                        [isVisible]="true" (clicked)="onBtnAddLookupClicked()"></shared-button>
+                </div>
+            </div>
+        </dxi-item>
+    </dx-form>
+</div>
+
+<div class="content-block dx-card responsive-paddings">
+    <dx-data-grid #grdLookups class="d-grid-no-bacth-actions-filter" [dataSource]="dtsLookups"
+        (onSelectionChanged)="gridListHelper.onSelectionChanged($event)"
+        (onContentReady)="onGrdLookupsContentReady($event)" (onToolbarPreparing)="onGrdLookupsToolbarPreparing($event)">
+
+        <dxo-export [enabled]="true" [fileName]="'Lookups'" [allowExportSelectedData]="false">
+            <dxo-texts exportAll="Export to Excel"></dxo-texts>
+        </dxo-export>
+        <dxo-paging [pageSize]="10"></dxo-paging>
+        <dxo-pager [showPageSizeSelector]="true" [showInfo]="true"></dxo-pager>
+        <dxo-filter-row [visible]="true"></dxo-filter-row>
+        <dxo-header-filter [visible]="true"></dxo-header-filter>
+
+        <dxi-column dataField="lookupText" caption="Text" [allowHeaderFiltering]="false" [allowFiltering]="true">
+        </dxi-column>
+        <dxi-column dataField="lookupType" caption="Type" [hidingPriority]="3" [allowHeaderFiltering]="true"
+            [allowFiltering]="false">
+        </dxi-column>
+        <dxi-column dataField="lookupValue" caption="Value" [hidingPriority]="2" [allowHeaderFiltering]="false"
+            [allowFiltering]="true">
+        </dxi-column>
+        <dxi-column dataField="modifiedDate" caption="Modified Date" [width]="200" dataType="date" [hidingPriority]="1"
+            [allowHeaderFiltering]="true" [allowFiltering]="true">
+        </dxi-column>
+        <dxi-column dataField="modifiedBy" caption="Modified By" [width]="200" [hidingPriority]="0" [allowFiltering]="true">
+        </dxi-column>
+        <dxi-column dataField="id" [width]="80" alignment="right" caption="Action" [allowEditing]="false"
+            [allowExporting]="false" [allowFiltering]="false" [allowFixing]="false" [allowGrouping]="false"
+            [allowHeaderFiltering]="false" [allowHiding]="false" [allowReordering]="false" [allowResizing]="false"
+            [allowSearch]="false" [allowSorting]="false" cellTemplate="buttonTemplate"></dxi-column>
+        <div *dxTemplate="let cellInfo of 'buttonTemplate'">
+            <div class="d-con-cell-action">
+                <button type="button" [disabled]="isDataProcessing" id="btnMainAction-{{cellInfo.data.id}}"
+                    (click)="onBtnMainActionClick(cellInfo.data)">
+                    Edit
+                </button>
+                <button type="button" class="d-btn-toggle"></button>
+            </div>
+        </div>
+    </dx-data-grid>
+
+</div>
+<ng-template #componentContainer></ng-template>

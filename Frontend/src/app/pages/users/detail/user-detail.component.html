@@ -1,0 +1,91 @@
+<dx-popup class="d-con-popup" [fullScreen]="true" [title]="popupTitle" [dragEnabled]="false" [showCloseButton]="true"
+    [shading]="false" [toolbarItems]="popupToolbarItems" [(visible)]="popupVisible" [animation]="popupAnimation"
+    (onHidden)="onPopupHidden($event)" (onHiding)="onPopupHiding($event)">
+    <dx-scroll-view *dxTemplate="let data of 'content'" class="d-con-popup-content">
+        <div class="d-con-form">
+            <dx-form #frmUserDetails [formData]="frmUserDetail" [colCount]="1" [readOnly]="!hasEditRight && isEditMode">
+                <dxi-item itemType="group" caption="Personal Details" [colCount]="2">
+                    <dxi-item dataField="firstName">
+                        <dxo-label [visible]="true" text="First Name"></dxo-label>
+                        <dxi-validation-rule type="required" message="First Name is required.">
+                        </dxi-validation-rule>
+                    </dxi-item>
+                    <dxi-item dataField="lastName">
+                        <dxo-label [visible]="true" text="Last Name"></dxo-label>
+                        <dxi-validation-rule type="required" message="Last Name is required.">
+                        </dxi-validation-rule>
+                    </dxi-item>
+                    <dxi-item dataField="email" [editorOptions]="{ mode: 'email',maxLength: 50 }">
+                        <dxo-label [visible]="true" text="Email Address"></dxo-label>
+                        <dxi-validation-rule type="required" message="Email address is required.">
+                        </dxi-validation-rule>
+                        <dxi-validation-rule type="email" message="Email address is not valid">
+                        </dxi-validation-rule>
+                    </dxi-item>
+                    <dxi-item dataField="phone" [editorOptions]="{mask: '(000) 000-0000'}">
+                        <dxo-label [visible]="true" text="Phone"></dxo-label>
+                        <dxi-validation-rule type="required" message="Phone is required.">
+                        </dxi-validation-rule>
+                    </dxi-item>
+                    <dxi-item dataField="userType">
+                        <dxo-label [visible]="true" text="User Type"></dxo-label>
+                        <dxi-validation-rule type="required" message="User Type is required">
+                        </dxi-validation-rule>
+                        <div *dxTemplate="let data of 'content'">
+                            <dx-drop-down-box [(value)]="selectedUserType" valueExpr="id" displayExpr="type"
+                                placeholder="Select..." [(opened)]="isUserGridBoxOpened" [deferRendering]="false"
+                                [dataSource]="dtsUserTypes" [readOnly]="!hasEditRight && isEditMode">
+                                <div *dxTemplate="let data of 'content'">
+                                    <dx-data-grid [dataSource]="dtsUserTypes" [keyExpr]="id" [hoverStateEnabled]="true"
+                                        (onRowClick)="onUserTypeOptionChanged($event.data)" [showColumnHeaders]="false"
+                                        [scrolling]="{ mode: 'infinite' }" [filterRow]="{ visible: false}" height="200">
+                                        <dxo-selection mode="single"></dxo-selection>
+                                        <dxi-column dataField="type" alignment="left"
+                                            cellTemplate="userTypeContentTemplate" [showInColumnChooser]="false"
+                                            [allowFiltering]="true" [allowHiding]="false">
+                                        </dxi-column>
+                                        <div *dxTemplate="let itemData of 'userTypeContentTemplate'">
+                                            <div class="pull-left d-type-padding-top">
+                                                {{itemData.data.title}}
+                                            </div>
+                                            <div class="pull-right">
+                                                <dx-button icon="rename" stylingMode="text"
+                                                    (onClick)="onBtnEditClicked(itemData.data)">
+                                                </dx-button>
+                                            </div>
+                                        </div>
+                                    </dx-data-grid>
+                                </div>
+                                <dxi-button name="dropDown"></dxi-button>
+                                <dxi-button name="create" location="after" [options]="addUserTypesOptions"></dxi-button>
+                            </dx-drop-down-box>
+                        </div>
+                    </dxi-item>
+
+                    <dxi-item dataField="isLoginAllow" editorType="dxCheckBox">
+                        <dxo-label [visible]="true" text="Allow Login"></dxo-label>
+                    </dxi-item>
+                </dxi-item>
+                <dxi-item itemType="group" caption="User Login Info" [colCount]="2">
+                    <dxi-item dataField="password" [editorOptions]="{ mode: 'password',maxLength: 50 }">
+                        <dxo-label [visible]="true" text="Password"></dxo-label>
+                        <dxi-validation-rule type="required" message="Password is required.">
+                        </dxi-validation-rule>
+                    </dxi-item>
+                    <dxi-item dataField="confirmPassword" [editorOptions]="{ mode: 'password',maxLength: 50 }">
+                        <dxo-label [visible]="true" text="Confirm Password"></dxo-label>
+                        <dxi-validation-rule type="required" message="Confirm Password is required.">
+                        </dxi-validation-rule>
+                        <dxi-validation-rule type="compare" [comparisonTarget]="comparePassword"
+                            message="Password and Confirm Password do not match">
+                        </dxi-validation-rule>
+                    </dxi-item>
+
+
+                </dxi-item>
+            </dx-form>
+        </div>
+    </dx-scroll-view>
+</dx-popup>
+
+<ng-template #componentDetailContainer></ng-template>

@@ -1,0 +1,40 @@
+<dx-popup class="d-con-pop" [(visible)]="popupVisible" [toolbarItems]="popupToolbarItems" [(width)]="popupWidth"
+    [(height)]="popupHeight" [title]="popupTitle" [dragEnabled]="true" [resizeEnabled]="true"
+    (onHiding)="onPopupHiding($event)" (onHidden)="onPopupHidden($event)"
+    (onInitialized)="onRolePopupInitialized($event)">
+    <div *dxTemplate="let data of 'content'" class="d-con-popup-content">
+        <dx-form #frmUserRoles [formData]="frmUserRole" [colCount]="1" [readOnly]="!hasEditRight && isEditMode">
+            <dxi-item dataField="title">
+                <dxi-validation-rule type="required" message="Title is required"></dxi-validation-rule>
+                <dxo-label [visible]="true" text="Title"></dxo-label>
+            </dxi-item>
+            <dxi-item>
+                <div *dxTemplate="let data of content">
+                    <dx-data-grid #roleMenus class="d-grid-no-bacth-actions-filter"
+                        [dataSource]="frmUserRole.permissions" (onCellPrepared)="onGrdRolesCellPrepared($event)"
+                        [keyExpr]="menuId" (onRowUpdating)="onRoleRowUpdating($event)">
+                        <dxo-editing mode="cell" [allowUpdating]="true" [allowDeleting]="false" [allowAdding]="false">
+                        </dxo-editing>
+                        <dxo-paging [pageSize]="5"></dxo-paging>
+                        <dxo-filter-row [visible]="true" [showOperationChooser]="false"></dxo-filter-row>
+                        <dxi-column dataField="title" caption="Menu Title" sortOrder="asc" [allowSorting]="false"
+                            [allowHeaderFiltering]="false" [allowFiltering]="true" [allowEditing]="false">
+                        </dxi-column>
+                        <dxi-column dataField="hasAddRight" caption="Add Permission" [hidingPriority]="3"
+                            [allowHeaderFiltering]="false" [allowFiltering]="false" [allowSorting]="false">
+                        </dxi-column>
+                        <dxi-column dataField="hasEditRight" caption="Edit Permission" [hidingPriority]="3"
+                            [allowHeaderFiltering]="false" [allowFiltering]="false" [allowSorting]="false">
+                        </dxi-column>
+                        <dxi-column dataField="hasDeleteRight" caption="Delete Permission" [hidingPriority]="3"
+                            [allowHeaderFiltering]="false" [allowFiltering]="false" [allowSorting]="false">
+                        </dxi-column>
+                        <dxi-column dataField="hasViewRight" caption="View Permission" [hidingPriority]="3"
+                            [allowHeaderFiltering]="false" [allowFiltering]="false">
+                        </dxi-column>
+                    </dx-data-grid>
+                </div>
+            </dxi-item>
+        </dx-form>
+    </div>
+</dx-popup>

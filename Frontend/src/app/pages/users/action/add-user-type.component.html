@@ -1,0 +1,13 @@
+<dx-popup class="d-third-popup-zOrder" [(visible)]="popupVisible" [toolbarItems]="popupToolbarItems"
+    [(width)]="popupWidth" [(height)]="popupHeight" [title]="popupTitle" [dragEnabled]="true" [resizeEnabled]="true"
+    (onHiding)="onPopupHiding($event)" (onHidden)="onPopupHidden($event)"
+    (onInitialized)="onTypePopupInitialized($event)">
+    <div *dxTemplate="let data of 'content'" class="d-con-popup-content">
+        <dx-form #frmUserTypes [formData]="frmUserType">
+            <dxi-item dataField="title">
+                <dxi-validation-rule type="required" message="Title is required"></dxi-validation-rule>
+                <dxo-label [visible]="true" text="Title"></dxo-label>
+            </dxi-item>
+        </dx-form>
+    </div>
+</dx-popup>

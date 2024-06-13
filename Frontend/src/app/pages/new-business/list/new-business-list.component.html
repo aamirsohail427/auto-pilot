@@ -1,0 +1,88 @@
+<div class="page-title">
+    <dx-form labelLocation="left" [showColonAfterLabel]="false" [colCount]="12">
+        <dxo-col-count-by-screen [xs]="2" [sm]="2" [md]="2" [lg]="2"></dxo-col-count-by-screen>
+        <dxi-item>
+            <div *dxTemplate>
+                <h2 class="page-info-title">New Business</h2>
+            </div>
+        </dxi-item>
+        <dxi-item>
+            <div *dxTemplate>
+                <div class="pull-right">
+                    <shared-button class="d-shared-button" [customText]="'Add Business'" [isDisabled]="isDataProcessing"
+                        [isVisible]="true" (clicked)="onBtnAddNewBusinessClicked()">
+                    </shared-button>
+                </div>
+            </div>
+        </dxi-item>
+    </dx-form>
+</div>
+<div class="d-con-page-tiles">
+    <dx-form>
+        <dxo-col-count-by-screen [xs]="1" [sm]="1" [md]="1" [lg]="1"></dxo-col-count-by-screen>
+        <dxi-item cssClass="d-no-left-right-padding">
+            <div class="d-map-card ">
+                <div class="d-map-card-icon d-map-card-clickable d-map-card-archived d-full-box">
+                    <div class="d-value">
+                        {{ numOfNewBusiness | currency:'':'':'1.0-0' }}
+                    </div>
+                    <div class="d-title">
+                        New Business
+                    </div>
+                </div>
+            </div>
+        </dxi-item>
+    </dx-form>
+</div>
+<div class="content-block dx-card responsive-paddings">
+    <dx-data-grid #grdNewBusiness class="d-grid-no-bacth-actions-filter" [dataSource]="dtsNewBusiness"
+        (onToolbarPreparing)="onGrdNewBusinessToolbarPreparing($event)">
+        <dxo-export [enabled]="true" [fileName]="'New Business'" [allowExportSelectedData]="false">
+            <dxo-texts exportAll="Export to Excel"></dxo-texts>
+        </dxo-export>
+        <dxo-paging [pageSize]="25"></dxo-paging>
+        <dxo-pager [showPageSizeSelector]="true" [allowedPageSizes]="listPagerSource"></dxo-pager>
+        <dxo-filter-row [visible]="true"></dxo-filter-row>
+        <dxo-header-filter [visible]="true"></dxo-header-filter>
+
+        <dxi-column dataField="carrier" caption="Company Name" [allowHeaderFiltering]="false" [hidingPriority]="5"
+            [allowFiltering]="true">
+        </dxi-column>
+        <dxi-column dataField="customerName" caption="Customer Name" [allowHeaderFiltering]="false"
+            [allowFiltering]="true">
+        </dxi-column>
+        <dxi-column dataField="lob" caption="Business Line" [allowHeaderFiltering]="true" [hidingPriority]="4"
+            [allowFiltering]="true">
+        </dxi-column>
+        <dxi-column dataField="csr" caption="CSR" [allowHeaderFiltering]="true" [hidingPriority]="3"
+            [allowFiltering]="true">
+        </dxi-column>
+        <dxi-column dataField="agent" caption="Agent" [allowHeaderFiltering]="true" [hidingPriority]="2"
+            [allowFiltering]="true">
+        </dxi-column>
+        <dxi-column dataField="sublineName" alignment="left" [hidingPriority]="0" [allowHeaderFiltering]="true"
+            [allowFiltering]="false" caption="Status"></dxi-column>
+
+        <dxi-column dataField="effectiveDate" caption="Effective Date" [hidingPriority]="1" dataType="date"
+            [allowHeaderFiltering]="true" [allowFiltering]="true" [format]="dateTimeFormat">
+        </dxi-column>
+        <dxi-column dataField="openSinceDays" caption="Open Since Days" [allowHeaderFiltering]="false"
+            [allowFiltering]="true">
+        </dxi-column>
+        <dxi-column dataField="id" [width]="80" alignment="right" caption="Action" [allowEditing]="false"
+            [allowExporting]="false" [allowFiltering]="false" [allowFixing]="false" [allowGrouping]="false"
+            [allowHeaderFiltering]="false" [allowHiding]="false" [allowReordering]="false" [allowResizing]="false"
+            [allowSearch]="false" [allowSorting]="false" cellTemplate="buttonTemplate"></dxi-column>
+        <div *dxTemplate="let buttonInfo of 'buttonTemplate'">
+            <div class="d-con-cell-action text-right">
+                <button type="button" [disabled]="isDataProcessing" id="btnMainAction-{{buttonInfo.data.id}}"
+                    (click)="onBtnMainActionClick(buttonInfo.data)">
+                    View
+                </button>
+            </div>
+        </div>
+
+    </dx-data-grid>
+
+</div>
+<ng-template #componentContainer></ng-template>

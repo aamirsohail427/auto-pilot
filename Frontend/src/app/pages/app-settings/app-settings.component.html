@@ -1,0 +1,94 @@
+<h2 class="content-block">General Settings</h2>
+
+<div class="content-block dx-card responsive-paddings">
+    <dx-form #frmAppSettingDetails [(formData)]="dtsAppSettings" labelLocation="top" [colCount]="2">
+        <dxi-item itemType="group" caption="Personal Details">
+            <dxi-item dataField="companyName">
+                <dxo-label [visible]="true" text="Company Name"></dxo-label>
+                <dxi-validation-rule type="required" message="Company Name is required.">
+                </dxi-validation-rule>
+            </dxi-item>
+
+            <dxi-item dataField="billingAddress">
+                <dxo-label [visible]="true" text="Billing Address"></dxo-label>
+            </dxi-item>
+            <dxi-item dataField="shippingAddress">
+                <dxo-label [visible]="true" text="Shipping Address"></dxo-label>
+            </dxi-item>
+            <dxi-item dataField="primaryEmail" [editorOptions]="{ mode: 'email',maxLength: 50 }">
+                <dxo-label [visible]="true" text="Email"></dxo-label>
+                <dxi-validation-rule type="required" message="Email address is required.">
+                </dxi-validation-rule>
+                <dxi-validation-rule type="email" message="Email address is not valid">
+                </dxi-validation-rule>
+            </dxi-item>
+            <dxi-item dataField="severe" editorType="dxNumberBox" [editorOptions]="{min:0}">
+                <dxo-label [visible]="true" text="Severe"></dxo-label>
+            </dxi-item>
+            <dxi-item dataField="moderate" editorType="dxNumberBox" [editorOptions]="{min:0}">
+                <dxo-label [visible]="true" text="Moderate"></dxo-label>
+            </dxi-item>
+            <dxi-item dataField="low" editorType="dxNumberBox" [editorOptions]="{min:0}">
+                <dxo-label [visible]="true" text="Low"></dxo-label>
+            </dxi-item>
+        </dxi-item>
+        <dxi-item itemType="group" caption="Account Info">
+            <dxi-item dataField="username">
+                <dxo-label [visible]="true" text="Username"></dxo-label>
+                <dxi-validation-rule type="required" message="Username is required.">
+                </dxi-validation-rule>
+            </dxi-item>
+            <dxi-item dataField="password" [editorOptions]="{ mode: 'password' }">
+                <dxo-label [visible]="true" text="Password"></dxo-label>
+                <dxi-validation-rule type="required" message="Password is required.">
+                </dxi-validation-rule>
+            </dxi-item>
+            <dxi-item dataField="clientId">
+                <dxo-label [visible]="true" text="Client ID"></dxo-label>
+            </dxi-item>
+            <dxi-item dataField="clientSecret">
+                <dxo-label [visible]="true" text="Client Secret"></dxo-label>
+            </dxi-item>
+
+            <dxi-item dataField="smtp" [editorOptions]="{ mode: 'email',maxLength: 50 }">
+                <dxo-label [visible]="true" text=" SMTP Email"></dxo-label>
+                <dxi-validation-rule type="required" message="SMTP Email address is required.">
+                </dxi-validation-rule>
+                <dxi-validation-rule type="email" message="Email address is not valid">
+                </dxi-validation-rule>
+            </dxi-item>
+            <dxi-item dataField="smtpassword">
+                <dxo-label [visible]="true" text=" SMTP Password"></dxo-label>
+                <dxi-validation-rule type="required" message="SMTP password is required">
+                </dxi-validation-rule>
+            </dxi-item>
+
+        </dxi-item>
+        <dxi-item [colSpan]="2">
+            <dxo-label [visible]="isPhotoPreview" text="Agency Logo"></dxo-label>
+            <div *dxTemplate="let data of 'content'">
+                <div *ngIf="dtsAppSettings.logoUrl && isImageEditMode">
+                    <img src="https://thelivemd.blob.core.windows.net/mdlive/{{dtsAppSettings.logoUrl}}" [width]="150"
+                        alt="" />
+                </div>
+                <div id="preview" *ngIf="isPhotoPreview" class="mt-1 mb-1"></div>
+                <div class="d-con-button-trash">
+                    <!-- <dx-button *ngIf="isPhotoPreview" class="d-con-button-trash-buttom" icon="fa fa-trash"
+                        (click)="onBtnDeletePhotoClick()"></dx-button> -->
+                    <dx-file-uploader selectButtonText="Select Image" labelText="" [disabled]="isPhotoPreview"
+                        selectButtonText="Upload Logo" (onValueChanged)="onFudPhotoValueChanged($event)"
+                        [multiple]="false" [maxFileSize]="3000000" accept="image/*" uploadMode="useForm">
+                    </dx-file-uploader>
+                </div>
+            </div>
+        </dxi-item>
+        <dxi-item [colSpan]="2">
+            <div *dxTemplate>
+                <shared-button class="d-shared-button pull-right" (clicked)="onBtnSaveSettingClicked()"
+                    [customText]="'Save'" [isDisabled]="isDataProcessing" [isVisible]="true">
+                </shared-button>
+            </div>
+
+        </dxi-item>
+    </dx-form>
+</div>

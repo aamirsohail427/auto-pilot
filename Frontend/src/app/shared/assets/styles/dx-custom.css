@@ -1,0 +1,300 @@
+/*========================================================================
+  Custom css to override the DevX default styles
+======================================================================= */
+.dx-popup-wrapper > .dx-state-focused.dx-popup-fullscreen,
+.dx-popup-wrapper > .dx-popup-fullscreen{
+    border: none;
+}
+
+.dx-popup-content{
+    padding: 0px;    
+}
+
+.dx-formdialog .dx-popup-content{
+    padding: 20px;    
+}
+
+.dx-popup-fullscreen .dx-popup-content {
+    background-color: #f4f5f8;
+}
+
+.dx-popup-fullscreen .dx-popup-bottom.dx-toolbar{
+    padding: 8px 15px;
+    background: #393a3d !important;
+}
+
+.dx-datagrid-content .dx-datagrid-table .dx-row .dx-command-select{
+    width: 110px;
+    min-width: 110px;
+}
+
+.dx-datagrid-content .dx-datagrid-table .dx-row .dx-command-edit{
+    width: 100px;
+    min-width: 100px;
+}
+
+.dx-form label.dx-field-item-label{
+    font-weight: normal;
+}
+
+.dx-menu-item.dx-state-hover {
+    color:#217915 !important;;
+}
+
+.dx-numberbox .dx-texteditor-input{
+    text-align: right;
+}
+
+.d-form-last-item .dx-invalid-message.dx-overlay{
+    position: absolute;
+    bottom: -8px;    
+    width: 100%;
+}
+
+.d-form-last-item .dx-invalid-message.dx-overlay .dx-overlay-content{
+    transform: none !important;
+}
+
+.d-shared-button .dx-button.dx-dropdownbutton-action,
+.d-shared-button .dx-button.dx-button-default{
+    background-color: #2CA01C !important;;
+    border-color: transparent;
+    color: #fff;
+}
+.d-shared-button .dx-button-default.dx-button.dx-state-focused,
+.d-shared-button .d-dropdown-button .dx-buttongroup-item.dx-button.dx-button-mode-outlined.dx-state-focused {
+    background-color: #217915 !important;;
+    border-color: transparent;
+}
+
+.d-shared-button .d-dropdown-button .dx-button-content .dx-button-text {
+    padding: 7px 10px 8px 14px;
+}
+
+.d-shared-button .d-dropdown-button .dx-button-content::after {
+    width: 0;
+    height: 0;
+    margin-right: 10px;
+    margin-top: 3px;
+    border-left: 5px solid transparent;
+    border-right:5px solid transparent;
+    border-top:6px solid white;
+}
+.d-shared-button .dx-button-default.dx-button:hover,
+.d-shared-button .d-dropdown-button .dx-button:hover {
+    background-color: #217915 !important;;
+    border-color: transparent;
+}
+
+.d-shared-button .dx-button-default.dx-button:active,
+.d-shared-button .d-dropdown-button .dx-button:active {
+    background-color: #113c0b !important;;
+    border-color: transparent;
+    color: #fff;
+}
+
+.d-split-button .dx-button.dx-dropdownbutton-action {
+    border-top-left-radius: 6px !important;
+    border-bottom-left-radius: 6px !important;
+}
+
+.d-split-button .dx-button.dx-dropdownbutton-toggle {
+    border-top-right-radius: 6px !important;
+    border-bottom-right-radius: 6px !important;
+}
+
+.d-split-button .dx-button.dx-dropdownbutton-action,
+.d-split-button .dx-button.dx-dropdownbutton-toggle,
+.d-split-button .dx-button.dx-button-default{
+    background-color: #2CA01C !important;;
+    border-color: transparent;
+    color: #fff;
+}
+.d-split-button .dx-button-default.dx-button.dx-state-focused,
+.d-split-button .d-dropdown-button .dx-buttongroup-item.dx-button.dx-button-mode-outlined.dx-state-focused {
+    background-color: #1e6c13 !important;;
+    border-color: transparent;
+}
+
+.d-split-button .d-dropdown-button .dx-button-content .dx-button-text {
+    padding: 7px 10px 8px 14px;
+}
+
+.d-split-button .dx-button-default.dx-button:hover,
+.d-split-button .d-dropdown-button .dx-button:hover {
+    background-color: #217915 !important;;
+    border-color: transparent;
+}
+
+.d-split-button .dx-button-default.dx-button:active,
+.d-split-button .d-dropdown-button .dx-button:active {
+    background-color: #113c0b !important;;
+    border-color: transparent;
+    color: #fff;
+}
+
+.d-split-button .dx-buttongroup-item.dx-button.dx-button-mode-outlined.dx-state-hover {
+    background-color: #217915 !important;;
+}
+.d-split-button .dx-buttongroup-item.dx-button.dx-button-mode-outlined.dx-state-focused {
+    background-color: #2CA01C;
+ }
+
+.dx-button-danger.dx-button-mode-contained {
+    background-color: #ffffff !important;
+    border-color: #8D9096 !important;
+    color: #454547 !important;
+}
+
+.dx-button-danger.dx-button-mode-contained .dx-icon {
+    color: #fff;
+}
+
+.dx-button-danger.dx-button-mode-contained.dx-state-hover {
+    border-color: #6e7178 !important;;
+}
+
+.dx-button-danger.dx-button-mode-contained.dx-state-focused {
+    background-color: #e6e6e6 !important;
+    border-color: #4e5155 !important;
+}
+
+.dx-button-danger.dx-button-mode-contained.dx-state-active {
+    background-color: #bfbfbf !important;
+    border-color: #4e5155 !important;
+    color: #393A3D !important;
+}
+
+.dx-menu-item.dx-state-hover {
+    color: #217915 !important;;
+}
+
+.d-round-border.dx-dropdowneditor.dx-state-hover:not(.dx-custom-button-hovered) .dx-dropdowneditor-icon,
+.d-round-border.dx-dropdowneditor.dx-state-active .dx-dropdowneditor-icon,
+.d-round-border.dx-dropdowneditor.dx-dropdowneditor-active .dx-dropdowneditor-icon, 
+.d-round-border.dx-dropdowneditor-button.dx-state-active .dx-dropdowneditor-icon {
+  background-color: inherit;
+  border-color: transparent;
+}
+
+.d-round-border.dx-dropdowneditor.dx-state-hover {
+    background-color: #f5f5f5;
+}
+
+.d-round-border.dx-dropdowneditor.dx-state-active {
+    background-color: #c2c2c2;
+    border-color: #ddd;
+}
+
+/* .dx-toolbar-before .dx-texteditor-container {
+    padding: 0 8px 0 10px;
+} */
+
+.dx-button-content .d-dropdown-arrow {
+    font-size: 18px;
+    padding-top: 6px;
+}
+
+.d-round-button.dx-button {
+    border-radius: 6px;
+
+}
+.d-round-button.dx-button .dx-button-content i::before {
+    color: white;
+}
+
+.d-dialog-button.dx-button {
+    font-weight: 600;
+}
+
+.d-dialog-button.dx-button.dx-button-danger.dx-state-hover {
+    background-color: white;
+    box-shadow: inset 0 0 0 1px #8D9096;
+}
+
+.d-dialog-button.dx-button.dx-button-danger.dx-state-focused {
+    background-color: white !important;
+    box-shadow: inset 0 0 0 1px transparent, 0 0 0 3px #dcdcdc;
+}
+
+.d-trowser-button.dx-button {
+    font-weight: 600;
+}
+
+.d-trowser-button.dx-button.dx-button-success {
+    box-shadow: none;
+    border: 1px solid #6B6C72;
+    background-color: transparent;
+    min-width: 80px;
+}
+
+.d-trowser-button .dx-item.dx-button.dx-dropdownbutton-action {
+    font-weight: 600;
+    box-shadow: none;
+    border-top-left-radius: 6px;
+    border-bottom-left-radius: 6px;
+    color: white;
+    border: 1px solid #6B6C72;
+    background-color: transparent;
+    border-right: none;
+    min-width: 80px;
+}
+.d-trowser-button .dx-item.dx-button.dx-dropdownbutton-action,
+.d-trowser-button .dx-item.dx-button.dx-dropdownbutton-toggle {
+    background-color: #2CA01C !important;;
+}
+
+.d-trowser-button .dx-item.dx-button.dx-dropdownbutton-action.dx-state-hover,
+.d-trowser-button .dx-item.dx-button.dx-dropdownbutton-toggle.dx-state-hover {
+    background-color: #217915 !important;
+}
+
+
+.d-trowser-button .dx-item.dx-button.dx-dropdownbutton-toggle {
+    border-top-right-radius: 6px;
+    border-bottom-right-radius: 6px;
+    border: 1px solid #6B6C72;
+    border-left: none;
+    min-width: 0;
+}
+
+.d-trowser-button .dx-item.dx-button.dx-dropdownbutton-toggle .dx-icon {
+    color: white;
+    font-size: 24px;
+    width:24px
+}
+
+.d-trowser-button.dx-button-success.dx-button-mode-contained.dx-state-hover {
+    background-color: #2A2B2D !important;
+}
+.dx-popup-title .dx-button,
+.dx-popup-bottom .dx-button,
+.d-con-button-contain .dx-button,
+.d-con-task-container .dx-button,
+.d-org-detail-interface-options .dx-button,
+.dx-fileuploader-content .dx-button,
+.d-con-tab-content .dx-button,
+.d-view-graph.dx-button,
+.d-view-definition.dx-button{
+    border-radius: 6px;
+}
+.d-batch-guide {
+    font-size: 18px;
+    display: inline-block;
+    width: 18px;
+    text-align: center;
+    position: relative;
+    top: 10px;
+    transform: scaleX(-1);
+    right: -8px;
+    color: #959595;
+    margin-right: 5px;
+}
+.d-grid-no-bacth-actions-filter .d-batch-guide {
+    padding-right: 0;
+   }
+   
+   .d-grid-no-bacth-actions-filter .dx-datagrid-content .dx-datagrid-table .dx-row .dx-command-select {
+    width: 30px;
+    min-width: 30px;
+   }

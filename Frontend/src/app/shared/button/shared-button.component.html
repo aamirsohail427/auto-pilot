@@ -1,0 +1,7 @@
+<dx-button *ngIf="!isDropDown" #button class="d-shared-button" [text]="customText" [width]="width"
+  [type]="customType" [disabled]="isDisabled" [visible]="isVisible" (click)="onClicked()"></dx-button>
+<dx-drop-down-button *ngIf="isDropDown" #dropDownButton [text]="customText"
+  [splitButton]="splitButton"[ngClass]="{'d-split-button': splitButton, 'd-dropdown-button': !splitButton}"
+  [disabled]="isDisabled" [visible]="isVisible" displayExpr="text" keyExpr="value" [showArrowIcon]="false"
+  [items]="items" (onButtonClick)="onButtonClick($event)" (onItemClick)="onItemClick($event)"
+  [dataSource]="dataSource" [width]="width"></dx-drop-down-button>

@@ -1,0 +1,120 @@
+<dx-context-menu #cnmActions [dataSource]="dtsActions" [width]="'auto'" [target]="cnmActionsTarget"
+    [(visible)]="cnmActionsVisible" (onItemClick)="onCnmActionsItemClick($event)" [showEvent]="undefined">
+    <dxo-position [my]="'top right'" [at]="'bottom right'"></dxo-position>
+</dx-context-menu>
+<dx-context-menu #cnmBatchActions [dataSource]="dtsBatchActions" [width]="'auto'" target="#btnBatchActions"
+    [(visible)]="cnmBatchActionsVisible" (onItemClick)="onCnmBatchActionsItemClick($event)" [showEvent]="undefined">
+    <dxo-position [my]="'top left'" [at]="'bottom left'"></dxo-position>
+</dx-context-menu>
+<div class="page-title">
+    <dx-form labelLocation="left" [showColonAfterLabel]="false" [colCount]="12">
+        <dxo-col-count-by-screen [xs]="2" [sm]="2" [md]="2" [lg]="2"></dxo-col-count-by-screen>
+        <dxi-item>
+            <div *dxTemplate>
+                <h2 class="page-info-title">Companies</h2>
+            </div>
+        </dxi-item>
+        <dxi-item>
+            <div *dxTemplate>
+                <div class="pull-right">
+                    <shared-button class="d-shared-button" [customText]="'Add Company'" [isDisabled]="isDataProcessing"
+                        [isVisible]="btnAddCompanyVisible" (clicked)="onBtnCompanyClicked()">
+                    </shared-button>
+                </div>
+            </div>
+        </dxi-item>
+    </dx-form>
+</div>
+<div class="d-con-page-tiles">
+    <dx-form>
+        <dxo-col-count-by-screen [xs]="1" [sm]="3" [md]="3" [lg]="3"></dxo-col-count-by-screen>
+        <dxi-item cssClass="d-no-left-right-padding">
+            <div class="d-map-card ">
+                <div class="d-map-card-icon d-map-card-clickable d-map-card-active d-full-box"
+                    (click)="onTileClick('Active')">
+                    <div class="d-value">
+                        {{ dtsPageTiles.numOfActive | currency:'':'':'1.0-0' }}
+                    </div>
+                    <div class="d-title">
+                        Active
+                    </div>
+                </div>
+            </div>
+        </dxi-item>
+        <dxi-item cssClass="d-no-left-right-padding">
+            <div class="d-map-card ">
+                <div class="d-map-card-icon d-map-card-clickable d-full-box d-map-card-archived"
+                    (click)="onTileClick('Archived')">
+                    <div class="d-value">
+                        {{ dtsPageTiles.numOfInactive | currency:'':'':'1.0-0' }}
+                    </div>
+                    <div class="d-title">
+                        Archived
+                    </div>
+                </div>
+            </div>
+        </dxi-item>
+        <dxi-item cssClass="d-no-left-right-padding">
+            <div class="d-map-card ">
+                <div class="d-map-card-icon d-map-card-clickable d-full-box d-map-card-total"
+                    (click)="onTileClick('All')">
+                    <div class="d-value">
+                        {{ dtsPageTiles.numOfTotal | currency:'':'':'1.0-0' }}
+                    </div>
+                    <div class="d-title">
+                        All
+                    </div>
+                </div>
+            </div>
+        </dxi-item>
+    </dx-form>
+</div>
+<div class="content-block dx-card responsive-paddings">
+    <dx-data-grid #grdCompanies class="d-grid-no-bacth-actions-filter" [dataSource]="dtsCompanies"
+        (onContentReady)="onGrdCompaniesContentReady($event)" [(selectedRowKeys)]="grdCompaniesSelectedRowKeys"
+        (onToolbarPreparing)="onGrdCompaniesToolbarPreparing($event)" (onRowClick)="onGrdCompaniesRowClick($event)">
+
+        <dxo-export [enabled]="true" [fileName]="'Companies'" [allowExportSelectedData]="false">
+            <dxo-texts exportAll="Export to Excel"></dxo-texts>
+        </dxo-export>
+        <dxo-paging [pageSize]="25"></dxo-paging>
+        <dxo-pager [showPageSizeSelector]="true" [allowedPageSizes]="listPagerSource"></dxo-pager>
+        <dxo-filter-row [visible]="true"></dxo-filter-row>
+        <dxo-header-filter [visible]="true"></dxo-header-filter>
+        <dxo-selection mode="multiple" selectAllMode="page" showCheckBoxesMode="always"></dxo-selection>
+
+        <dxi-column dataField="title" caption="Title" [allowHeaderFiltering]="false" [allowFiltering]="true">
+        </dxi-column>
+
+        <dxi-column dataField="modifiedDate" caption="Modified Date" dataType="date" [hidingPriority]="2"
+            [allowHeaderFiltering]="true" [allowFiltering]="true" [format]="dateTimeFormat">
+        </dxi-column>
+        <dxi-column dataField="modifiedBy" caption="Modified By" [hidingPriority]="1" [allowHeaderFiltering]="false"
+            [allowFiltering]="true">
+        </dxi-column>
+        <dxi-column dataField="isArchived" caption="Archived" [width]="80" alignment="left"
+            cellTemplate="grdCompanyArchiveCellTemplate" [visible]="grdCompanyArchivedColumnVisible"
+            [showInColumnChooser]="true" [allowFiltering]="false" [allowHiding]="false">
+        </dxi-column>
+        <div *dxTemplate="let cellInfo of 'grdCompanyArchiveCellTemplate'">
+            <img *ngIf="cellInfo.data.isArchived" [width]="25" src="../../../../assets/images/checked.png" />
+        </div>
+        <dxi-column dataField="id" [width]="80" alignment="right" caption="Action" [allowEditing]="false"
+            [allowExporting]="false" [allowFiltering]="false" [allowFixing]="false" [allowGrouping]="false"
+            [allowHeaderFiltering]="false" [allowHiding]="false" [allowReordering]="false" [allowResizing]="false"
+            [allowSearch]="false" [allowSorting]="false" cellTemplate="buttonTemplate"></dxi-column>
+        <div *dxTemplate="let buttonInfo of 'buttonTemplate'">
+            <div class="d-con-cell-action text-right">
+                <button type="button" [disabled]="isDataProcessing" id="btnMainAction-{{buttonInfo.data.id}}"
+                    (click)="onBtnMainActionClick(buttonInfo.data)">
+                    {{getMainActionText()}}
+                </button>
+                <button type="button" class="d-btn-toggle" *ngIf="getTriangleVisibility()" id="btnMoreActions-{{buttonInfo.row.rowIndex}}"
+                    (click)="onBtnMoreActionsClick(buttonInfo.data,'btnMoreActions-'+buttonInfo.row.rowIndex)"></button>
+            </div>
+        </div>
+
+    </dx-data-grid>
+
+</div>
+<ng-template #componentContainer></ng-template>
